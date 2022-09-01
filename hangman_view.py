@@ -6,7 +6,7 @@ body_template = """
 │  5 6
 │"""
 
-answer_template = """
+current_answer_template = """
 │ <word>
 ┴─<spacer>─┤"""
 
@@ -40,14 +40,32 @@ class HangmanView:
             body = body.replace(str(index), ' ')
         return body
 
-    def __render_answer(self, word) -> None:
-        answer = answer_template
-        answer = answer.replace("<word>", word)
-        answer = answer.replace("<spacer>", "─" * len(word))
-        return answer
+    def __render_current_answer(self, word) -> None:
+        current_answer = current_answer_template
+        current_answer = current_answer.replace("<word>", word)
+        current_answer = current_answer.replace("<spacer>", "─" * len(word))
+        return current_answer
 
-    def draw(self, used_letter: set[str], num_of_errors: int) -> None:
-        print(self.__render_body(num_of_errors), end='')
-        current_word = self.gen_hidden_word(used_letter)
-        print(self.__render_answer(current_word))
+    def __render_wrong_answers(self, used_letters) -> None:
+        wrong_letters_list = list(used_letters.difference(self.__word_letters))
+        wrong_letters_list.sort()
+        wrong_answers = ', '.join(wrong_letters_list)
+
+        return wrong_answers
+
+    def draw(self, used_letters: set[str]) -> None:
+        num_of_errors = len(used_letters.difference(self.__word_letters))
+
+        body = self.__render_body(num_of_errors)
+
+        current_answer = self.gen_hidden_word(used_letters)
+        current_answer_render = self.__render_current_answer(current_answer)
+
+        print(body, end='')
+        print(current_answer_render)
         print()
+
+        if(num_of_errors > 0):
+            print("Letras erradas:")
+            print(self.__render_wrong_answers(used_letters))
+            print()
