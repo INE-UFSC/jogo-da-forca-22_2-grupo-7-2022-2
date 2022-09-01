@@ -1,8 +1,11 @@
+from hashlib import new
 from menu_control import MenuControl
 from word import get_letter
 from hangman_view import HangmanView
 
 while True:
+    new_game_check = False
+
     menu = MenuControl()
     word = menu.show_options()
     word_check = set(word)
@@ -27,11 +30,20 @@ while True:
             print("Você perdeu!")
             view.draw(used_letters)
             break
+
+    while True:
         
-    new_game = input('Você deseja jogar novamente? Sim ou Não? ')
-    if new_game == "Sim":
-        continue
-    elif new_game == "Não":
+        new_game = input('Você deseja jogar novamente? Sim ou Não? ')
+        print("")
+
+        if new_game == "Sim":
+            new_game_check = True
+            break
+        elif new_game == "Não":
+            new_game_check = False
+            break
+        else:
+            print('Escreva "Sim" ou "Não".')
+    
+    if new_game_check == False:
         break
-    else:
-        print('Escreva "Sim" ou "Não"')
