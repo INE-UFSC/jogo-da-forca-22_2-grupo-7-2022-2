@@ -1,5 +1,5 @@
 from menu_control import MenuControl
-from word import Word
+from word import get_letter
 from hangman_view import HangmanView
 
 menu = MenuControl()
@@ -14,7 +14,7 @@ num_max_errors = 7
 while True:
     view.draw(used_letters)
 
-    letter = Word.get_letter()
+    letter = get_letter()
     used_letters.add(letter)
 
     if used_letters >= word_check:
