@@ -1,7 +1,6 @@
 from random import randint
 
-
-class Menu_Control():
+class MenuControl():
 
     def show_options(self) -> None:
 
@@ -28,13 +27,13 @@ class Menu_Control():
         print('Neste modo, voce insere varias palavras e nos selecionamos uma para voce.')
         print('Pressione enter sem digitar nada para enviar as palavras desejadas.')
         while run:
-            print('Digite a palavra ', self.word_index)
+            print('Digite a palavra ', word_index)
             temporary = input()
             if temporary == '':
                 run = False
             else:
                 word_list.append(temporary)
-                self.word_index += 1
+                word_index += 1
 
         word = word_list[randint(0, len(word_list) - 1)].strip().upper()
         return word
