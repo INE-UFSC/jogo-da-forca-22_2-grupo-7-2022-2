@@ -1,41 +1,38 @@
-from cProfile import run
 from random import randint
 
-
-class Menu_Control():
-    def __init__(self) -> None:
-        self.word_list = []
-        self.word_index = 1
-        self.run = True
+class MenuControl():
 
     def show_options(self) -> None:
-
-        self.state = input("Bem-vindo ao Jogo da forca! :D\nDigite o numero referente a opcao desejada:\n1: Modo normal\n2: Sorteio de palavras\n")
-        if self.state == '1':
-            self.direct_word()
-        elif self.state == '2':
-            self.many_words()
-        else:
-            print("digite um valor valido.")
+        state = input("Bem-vindo ao Jogo da forca! :D\nDigite o número referente a opção desejada:\n1: Modo normal\n2: Sorteio de palavras\n").strip()
+        while state not in '12' or state == '12':
+            state = input("Opção não disponível.\nDigite um número válido referente a opção desejada:\n1: Modo normal\n2: Sorteio de palavras\n").strip()
+        if state == '1':
+            return self.direct_word()
+        elif state == '2':
+            return self.many_words()
         #precisa de um retorno aqui heh
 
     def direct_word(self) -> str:
         # Input da palavra a ser adivinhada e mudança para letras maiúsculas
-        self.word = input('Qual a palavra a ser adivinhada? ').strip().upper()
-        while not self.word.isalpha():
-            self.word = input('Digite apenas letras. Qual a palavra a ser adivinhada? ').strip().upper()
-        return self.word
+        word = input('Qual a palavra a ser adivinhada? ').strip().upper()
+        while not word.isalpha():
+            word = input('Digite apenas letras. Qual a palavra a ser adivinhada? ').strip().upper()
+        return word
 
-    def many_words(self) -> list:
+    def many_words(self) -> str:
+        word_list = []
+        run = True
+        word_index = 1
+        print('Neste modo, você insere várias palavras e nós selecionamos uma para você.')
         print('Pressione enter sem digitar nada para enviar as palavras desejadas.')
-        while self.run:
-            print('Digite a palavra ', self.word_index)
-            self.temporary = input()
-            if self.temporary == '':
-                self.run = False
+        while run:
+            print('Digite a palavra ', word_index)
+            temporary = input()
+            if temporary == '':
+                run = False
             else:
-                self.word_list.append(self.temporary)
-                self.word_index += 1
+                word_list.append(temporary)
+                word_index += 1
 
-        self.word = self.word_list[randint(0, len(self.word_list) - 1)].strip().upper()
-        return self.word
+        word = word_list[randint(0, len(word_list) - 1)].strip().upper()
+        return word
