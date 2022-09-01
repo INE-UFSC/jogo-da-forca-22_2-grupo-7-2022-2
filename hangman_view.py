@@ -66,6 +66,6 @@ class HangmanView:
         print()
 
         if(num_of_errors > 0):
-            print("Letras erradas:")
-            print(self.__render_wrong_answers(used_letters))
+            wrong_answer = self.__render_wrong_answers(used_letters)
+            print(" Letras erradas:", wrong_answer)
             print()
