@@ -20,15 +20,16 @@ while True:
 
         letter = get_letter()
         used_letters.add(letter)
+        print(len(used_letters))
 
         if used_letters >= word_check:
-            print("Você perdeu!")
             view.draw(used_letters)
+            print("Você ganhou!")
             break
 
-        elif num_of_errors >= num_max_errors:
-            print("Você perdeu!")
+        if num_of_errors >= num_max_errors:
             view.draw(used_letters)
+            print("Você perdeu!")
             break
 
     while True:
