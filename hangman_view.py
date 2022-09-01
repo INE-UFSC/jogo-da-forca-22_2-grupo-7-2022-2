@@ -21,10 +21,10 @@ class HangmanView:
         self.__word_letters = set(word)
 
     def gen_hidden_word(self, used_letter: set[str]):
-        remaining_letter = self.__word_letters.difference(used_letter)
+        remaining_letters = self.__word_letters.difference(used_letter)
 
         word_with_letters_hidden = self.__word
-        for letter in remaining_letter:
+        for letter in remaining_letters:
             word_with_letters_hidden = word_with_letters_hidden.replace(letter, '_')
         return word_with_letters_hidden
 
