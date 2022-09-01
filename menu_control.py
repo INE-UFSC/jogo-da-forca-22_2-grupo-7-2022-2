@@ -4,12 +4,9 @@ from random import randint
 
 class Menu_Control():
     def __init__(self) -> None:
-        self.word = None
         self.word_list = []
-        self.temporary = None
         self.word_index = 1
         self.run = True
-        self.state = None
 
     def show_options(self) -> None:
 
@@ -42,6 +39,3 @@ class Menu_Control():
 
         self.word = self.word_list[randint(0, len(self.word_list) - 1)].strip().upper()
         return self.word
-
-    def get_word_list(self):
-        return self.many_words
