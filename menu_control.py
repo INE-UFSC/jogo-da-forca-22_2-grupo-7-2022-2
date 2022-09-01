@@ -1,4 +1,5 @@
 from cProfile import run
+from random import randint
 
 
 class Menu_Control():
@@ -22,7 +23,10 @@ class Menu_Control():
         #precisa de um retorno aqui heh
 
     def direct_word(self) -> str:
-        self.word = input('Digite a palavra a ser procurada:\n')
+        # Input da palavra a ser adivinhada e mudança para letras maiúsculas
+        self.word = input('Qual a palavra a ser adivinhada? ').strip().upper()
+        while not self.word.isalpha():
+            self.word = input('Digite apenas letras. Qual a palavra a ser adivinhada? ').strip().upper()
         return self.word
 
     def many_words(self) -> list:
@@ -35,6 +39,9 @@ class Menu_Control():
             else:
                 self.word_list.append(self.temporary)
                 self.word_index += 1
+
+        self.word = self.word_list[randint(0, len(self.word_list) - 1)].strip().upper()
+        return self.word
 
     def get_word_list(self):
         return self.many_words
