@@ -1,17 +1,13 @@
-import re
+class Game_check:
 
-
-class Game_check():
-
-    def __init__(self, palavra: set, resposta: set) -> None:
+    def __init__(self, palavra: str, resposta: str) -> None:
         self.resposta = resposta
         self.palavra = palavra
         pass
 
 
-    def check(self):
+    def word_check(self):
         if self.resposta == self.palavra:
             return True
         else:
             return False
-        
