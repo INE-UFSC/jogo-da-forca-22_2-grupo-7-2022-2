@@ -20,7 +20,7 @@ class HangmanView:
         self.__word = word
         self.__word_letters = set(word)
 
-    def gen_hidden_word(self, used_letter: set[str]):
+    def gen_hidden_word(self, used_letter):
         remaining_letters = self.__word_letters.difference(used_letter)
 
         word_with_letters_hidden = self.__word
@@ -53,7 +53,7 @@ class HangmanView:
 
         return wrong_answers
 
-    def draw(self, used_letters: set[str]) -> None:
+    def draw(self, used_letters) -> None:
         num_of_errors = len(used_letters.difference(self.__word_letters))
 
         body = self.__render_body(num_of_errors)
