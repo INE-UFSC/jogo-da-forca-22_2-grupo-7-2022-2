@@ -6,7 +6,7 @@ def remove_accents(word):
     return normalize('NFKD', word).encode('ASCII', 'ignore').decode('utf8')
 
 def is_valid_word(word):
-    return not re.match(r'^[a-zA-ZáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ\- ]+$', word)
+    return re.match(r'^[a-zA-ZáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ\- ]+$', word)
 
 
 def get_letter():
