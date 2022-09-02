@@ -81,7 +81,6 @@ while True:
 
         letter = get_letter()
         used_letters.add(letter)
-        print(len(used_letters))
 
         if used_letters >= word_check:
             view.draw(used_letters)
