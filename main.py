@@ -1,6 +1,63 @@
 from menu_control import MenuControl
 from word import get_letter, remove_accents
 from hangman_view import HangmanView
+from os import system, name as os_name
+
+def clear_screen():
+    # windows
+    if os_name == 'nt':
+        system('cls')
+    # linux, mac, etc
+    elif os_name == 'posix':
+        system('clear')
+
+youwin = """ 
+__   _____  _   _  __      _____ _  _   _ 
+ \ \ / / _ \| | | | \ \    / /_ _| \| | | |
+  \ V / (_) | |_| |  \ \/\/ / | || .` | |_|
+   |_| \___/ \___/    \_/\_/ |___|_|\_| (_)"""
+
+trophy = """
+              '._==_==_=_.'     
+              .-\\:      /-.    
+             | (|:.     |) |    
+              '-|:.     |-'     
+                \\::.    /      
+                 '::. .'        
+                   ) (          
+                 _.' '._        
+                '-------'       """
+
+
+gameover = """
+   ___   _   __  __ ___ _____   _____ ___ 
+  / __| /_\ |  \/  | __/ _ \ \ / / __| _ \\
+ | (_ |/ _ \| |\/| | _| (_) \ V /| _||   /
+  \___/_/ \_\_|  |_|___\___/ \_/ |___|_|_\\"""
+
+hangman = """
+            ___ ___ ___ ___ ___  
+            |___|___|___|___|___| 
+            | |       | |          
+            | |       | |          
+            | |       | |          
+            |_|       |_|          
+            | |      /   \         
+            | |     | X X |        
+            | |      \___/         
+            |_|      _____        
+            | |     / / \ \       
+            | |    / /| |\ \      
+            | |   /_/ | | \_\     
+            |_|      _|_|_        
+            | |     / / \ \       
+            | |    / /   \ \      
+            | |   /_/     \_\     
+            |_|                   
+            | |                   
+            | |                   
+            | |                   
+            |_|                   """
 
 while True:
     new_game_check = False
@@ -28,12 +85,17 @@ while True:
 
         if used_letters >= word_check:
             view.draw(used_letters)
-            print("Você ganhou!")
+            print(trophy)
+            print(youwin)
+            print()
             break
 
         if num_of_errors >= num_max_errors:
             view.draw(used_letters)
-            print("Você perdeu!")
+
+            print(hangman)
+            print(gameover)
+            print()
             break
 
     while True:
@@ -49,6 +111,7 @@ while True:
             break
         else:
             print('Escreva "Sim" ou "Não".')
+    clear_screen()
 
     if new_game_check == False:
         break
