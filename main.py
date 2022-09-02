@@ -12,11 +12,11 @@ while True:
     view = HangmanView(word)
 
     used_letters = set()
-    num_of_errors = len(used_letters)
     num_max_errors = 7
 
     while True:
         view.draw(used_letters)
+        num_of_errors = len(used_letters.difference(word_check))
 
         letter = get_letter()
         used_letters.add(letter)
@@ -31,6 +31,8 @@ while True:
             view.draw(used_letters)
             print("Você perdeu!")
             break
+
+        print(num_of_errors)
 
     while True:
         
