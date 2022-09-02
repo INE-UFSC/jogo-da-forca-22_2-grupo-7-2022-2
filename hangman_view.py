@@ -1,3 +1,5 @@
+from word import remove_accents
+
 body_template = """
 ╭───╮ 
 │   0   
@@ -18,14 +20,17 @@ class HangmanView:
 
     def __init__(self, word: str):
         self.__word = word
-        self.__word_letters = set(word)
+        self.__word_letters = set(remove_accents(word))
 
     def gen_hidden_word(self, used_letter):
         remaining_letters = self.__word_letters.difference(used_letter)
 
-        word_with_letters_hidden = self.__word
-        for letter in remaining_letters:
-            word_with_letters_hidden = word_with_letters_hidden.replace(letter, '_')
+        word_with_letters_hidden = ''
+        for letter in self.__word:
+            if remove_accents(letter) in remaining_letters:
+                word_with_letters_hidden += '_'
+            else:
+                word_with_letters_hidden += letter
         return word_with_letters_hidden
 
     def __render_body(self, num_of_errors: int) -> str:

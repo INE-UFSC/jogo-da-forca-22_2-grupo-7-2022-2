@@ -1,6 +1,5 @@
-from hashlib import new
 from menu_control import MenuControl
-from word import get_letter
+from word import get_letter, remove_accents
 from hangman_view import HangmanView
 
 while True:
@@ -8,11 +7,16 @@ while True:
 
     menu = MenuControl()
     word = menu.show_options()
-    word_check = set(word)
+    word_check = set(remove_accents(word))
     view = HangmanView(word)
-
     used_letters = set()
-    num_max_errors = 7
+
+    if ' ' in word:
+        used_letters.add(' ')
+    if '-' in word:
+        used_letters.add('-')
+
+    num_max_errors = 6
 
     while True:
         view.draw(used_letters)
@@ -32,21 +36,19 @@ while True:
             print("Você perdeu!")
             break
 
-        print(num_of_errors)
-
     while True:
-        
+
         new_game = input('Você deseja jogar novamente? Sim ou Não? ')
         print("")
 
-        if new_game == "Sim":
+        if remove_accents(new_game).lower() == "sim":
             new_game_check = True
             break
-        elif new_game == "Não":
+        elif remove_accents(new_game).lower() == "nao":
             new_game_check = False
             break
         else:
             print('Escreva "Sim" ou "Não".')
-    
+
     if new_game_check == False:
         break

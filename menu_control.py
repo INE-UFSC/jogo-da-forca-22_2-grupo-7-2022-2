@@ -1,4 +1,6 @@
+from word import is_valid_word
 from random import randint
+
 
 class MenuControl():
 
@@ -15,8 +17,8 @@ class MenuControl():
     def direct_word(self) -> str:
         # Input da palavra a ser adivinhada e mudança para letras maiúsculas
         word = input('Qual a palavra a ser adivinhada? ').strip().upper()
-        while not word.isalpha():
-            word = input('Digite apenas letras. Qual a palavra a ser adivinhada? ').strip().upper()
+        while not is_valid_word(word):
+            word = input('Digite apenas letras, espaço e hifen. Qual a palavra a ser adivinhada? ').strip().upper()
         return word
 
     def many_words(self) -> str:
@@ -26,10 +28,12 @@ class MenuControl():
         print('Neste modo, você insere várias palavras e nós selecionamos uma para você.')
         print('Pressione enter sem digitar nada para enviar as palavras desejadas.')
         while run:
-            print('Digite a palavra ', word_index)
+            print('Digite a palavra', word_index)
             temporary = input()
             if temporary == '':
                 run = False
+            elif not is_valid_word(temporary):
+                print("Digite apenas letras, espaço e hifen.")
             else:
                 word_list.append(temporary)
                 word_index += 1
